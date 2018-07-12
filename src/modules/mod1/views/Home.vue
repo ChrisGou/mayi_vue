@@ -16,3 +16,10 @@ export default {
   }
 };
 </script>
+
+<style lang="stylus">
+.home
+  display flex
+  flex-direction column
+  padding 10px
+</style>
