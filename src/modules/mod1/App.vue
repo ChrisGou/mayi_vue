@@ -28,9 +28,6 @@ export default {
     Tabbar,
     TabbarItem
   },
-  created() {
-    console.log(this.$router.match(location).hash);
-  },
   data() {
     return {
       home: this.$router.match(location).hash == "#/",
@@ -38,11 +35,6 @@ export default {
       my: this.$router.match(location).hash == "#/my"
     };
   }
-  // route: {
-  //   data({ to }) {
-  //     console.log(to.name)//组织机构id
-  //   }
-  // }
 };
 </script>
 <style lang="less">
