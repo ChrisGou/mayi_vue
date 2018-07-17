@@ -1,6 +1,6 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="select">
+    <h1>This is an select page</h1>
     <group>
       <cell title="title" value="value"></cell>
     </group>

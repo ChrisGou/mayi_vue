@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import About from "./views/About.vue";
+import Select from "./views/Select.vue";
+import My from "./views/My.vue";
 
 Vue.use(Router);
 
@@ -13,9 +14,14 @@ export default new Router({
       component: Home
     },
     {
-      path: "/about",
-      name: "about",
-      component: About
+      path: "/select",
+      name: "select",
+      component: Select
+    },
+    {
+      path: "/my",
+      name: "my",
+      component: My
     }
   ]
 });
