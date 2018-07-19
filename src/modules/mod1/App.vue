@@ -2,13 +2,13 @@
   <div id="app">
     <router-view/>
     <tabbar>
-      <tabbar-item :selected="home" link="/">
+      <tabbar-item :selected="market" link="/">
         <i slot="icon" class='iconfont icon-supermarket'></i>
         <i slot="icon-active" class='iconfont icon-market'></i>
         <span slot="label">市场</span>
       </tabbar-item>
       <tabbar-item :selected="select" link="/select">
-        <i slot="icon" class='iconfont icon-nc-test-outline-px_bookmark-add'></i>
+        <i slot="icon" class='iconfont icon-tag-add-l'></i>
         <i slot="icon-active" class='iconfont icon-location-color_bookmark-add'></i>
         <span slot="label">自选</span>
       </tabbar-item>
@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      home: this.$router.match(location).hash == "#/",
+      market: this.$router.match(location).hash == "#/",
       select: this.$router.match(location).hash == "#/select",
       my: this.$router.match(location).hash == "#/my"
     };
@@ -46,6 +46,7 @@ body {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
+  background-color: #f5f5f5;
 }
 </style>
 <style lang="stylus">
@@ -62,4 +63,6 @@ body {
       color #42b983
 i
   font-size 20px!important
+.weui-tabbar
+  background-color #ffffff!important
 </style>
