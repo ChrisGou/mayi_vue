@@ -53,7 +53,7 @@ body {
 #app
   font-family 'Avenir', Helvetica, Arial, sans-serif
   color #2c3e50
-
+  padding-bottom 70px
 #nav
   padding 30px
   a
