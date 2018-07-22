@@ -104,6 +104,16 @@
         <span slot="after-title" class="after-title">专业机构，服务直达</span>
         <span slot="after-title" class="left-border"></span>
       </cell>
+      <div v-for="item of jjcfh_data" :key="item.name" class="jjcfh_data vux-1px-b">
+        <div class="left vux-1px-r">
+          <img :src="item.img" alt="">
+        </div>
+        <div class="right">
+          <p class="name">{{item.name}}</p>
+          <p class="info">{{item.info}}</p>
+          <p class="tip">{{item.tip}}</p>
+        </div>
+      </div>
     </group>
   </div>
 </template>
@@ -188,6 +198,26 @@ export default {
           info: '抢占"中国未来"风口',
           tip: "业绩支撑，行情向好"
         }
+      ],
+      jjcfh_data: [
+        {
+          img: require("../assets/yfd.png"),
+          name: "易方达基金财富号",
+          info: "五千万客户选了，来吧",
+          tip: "买入费率1折起"
+        },
+        {
+          img: require("../assets/gyrx.png"),
+          name: "工银瑞信基金财富号",
+          info: "聪明理财，工银一路陪伴",
+          tip: "买入费率1折起"
+        },
+        {
+          img: require("../assets/gt.png"),
+          name: "国泰基金财富号",
+          info: "股基投资NO.1，快跟上",
+          tip: "买入费率1折起"
+        }
       ]
     };
   }
@@ -231,7 +261,7 @@ export default {
 .after-title
   display block
   margin-left 8px
-  font-size 14px
+  font-size 13px
   color #999999
 .weui-cell_access
   font-size 14px
@@ -328,10 +358,11 @@ export default {
     color #FFFFFF
     padding 5px 0
 .item_data
-  padding 25px 15px
+  padding 25px 0
+  margin-left 15px
   display flex
   .left
-    flex 4
+    flex 1
     .rate
       font-size 22px
       color #fe5f3f
@@ -340,7 +371,7 @@ export default {
       color #999999
   .right
     width 0
-    flex 7
+    flex 2
     display flex
     flex-direction column
     justify-content center
@@ -384,4 +415,32 @@ export default {
       font-size 14px
       color #999999
       margin-top 5px
+.jjcfh_data
+  margin-left 15px
+  display flex
+  .left
+    width 80px
+    margin 20px 0
+    padding 10px 0
+    display flex
+    align-items center
+    justify-content  center
+    img 
+      width 50%
+  .right
+    flex 1
+    display flex
+    flex-direction column
+    justify-content center
+    padding-left 20px
+    .name
+      font-size 16px
+    .info
+      font-size 13px
+      color #999999
+    .tip
+      font-size 13px
+      color #fe5f3f
+      margin-top 2px
+      
 </style>
