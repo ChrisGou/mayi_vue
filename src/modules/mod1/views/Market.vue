@@ -1,18 +1,21 @@
 <template>
   <div>
-    <grid :show-lr-borders="false" :show-vertical-dividers="false">
-      <grid-item link="https://sina.cn" label="基金排行">
-        <i slot="icon" class='iconfont icon-paihangbang jjph'></i>
+    <grid :show-lr-borders="false" :show-vertical-dividers="false" class="market-grids">
+      <grid-item link="https://sina.cn" class="market-grid">
+        <i class='iconfont icon-paihangbang jjph'></i>
+        <p>基金排行</p>
       </grid-item>
-      <grid-item link="/" label="自选基金">
-        <i slot="icon" class='iconfont icon-u38 zxjj'></i>
+      <grid-item link="/" class="market-grid">
+        <i class='iconfont icon-u38 zxjj'></i>
+        <p>自选基金</p>
       </grid-item>
-      <grid-item link="/" label="主题选基">
-        <i slot="icon" class='iconfont icon-hot ztxj'></i>
+      <grid-item link="/" class="market-grid">
+        <i class='iconfont icon-hot ztxj'></i>
+        <p>主题选基</p>
       </grid-item>
     </grid>
-    <group>
-      <cell class="vux-1px-b" title="好基工作室" value="更多" is-link>
+    <group class="market-cells">
+      <cell class="market-cell vux-1px-b" title="好基工作室" value="更多" is-link>
         <span slot="after-title" class="left-border"></span>
       </cell>
       <div class="hjgzs">
@@ -30,8 +33,8 @@
         <x-button class="hjgzs-btn">10元体验好基金</x-button>
       </div>
     </group>
-    <group>
-      <cell class="vux-1px-b" title="低风险基金">
+    <group class="market-cells">
+      <cell class="market-cell vux-1px-b" title="低风险基金">
         <span slot="after-title" class="after-title">历史从未亏损</span>
         <span slot="after-title" class="left-border"></span>
       </cell>
@@ -43,8 +46,8 @@
         </grid-item>
       </grid>
     </group>
-    <group>
-      <cell class="vux-1px-b" title="每天10块钱" value="更多" is-link>
+    <group class="market-cells">
+      <cell class="market-cell vux-1px-b" title="每天10块钱" value="更多" is-link>
         <span slot="after-title" class="after-title">提前入市等牛来</span>
         <span slot="after-title" class="left-border"></span>
       </cell>
@@ -55,8 +58,8 @@
         <x-button class="mtskq-btn">立即定投</x-button>
       </div>
     </group>
-    <group>
-      <cell class="vux-1px-b" title="绩优基金">
+    <group class="market-cells">
+      <cell class="market-cell vux-1px-b" title="绩优基金">
         <span slot="after-title" class="after-title">王牌好基，业绩优良</span>
         <span slot="after-title" class="left-border"></span>
       </cell>
@@ -71,8 +74,8 @@
         </div>
       </div>
     </group>
-    <group>
-      <cell class="vux-1px-b" title="投资热点" value="更多" is-link>
+    <group class="market-cells">
+      <cell class="market-cell vux-1px-b" title="投资热点" value="更多" is-link>
         <span slot="after-title" class="left-border"></span>
       </cell>
       <div v-for="(item,index) of tzrd_data" :key="item.name" class="tzrd_data vux-1px-b">
@@ -83,8 +86,8 @@
         </div>
       </div>
     </group>
-    <group>
-      <cell class="vux-1px-b" title="投资海外">
+    <group class="market-cells">
+      <cell class="market-cell vux-1px-b" title="投资海外">
         <span slot="after-title" class="after-title">一键布局全球</span>
         <span slot="after-title" class="left-border"></span>
       </cell>
@@ -99,8 +102,8 @@
         </div>
       </div>
     </group>
-    <group>
-      <cell class="vux-1px-b" title="基金财富号" value="更多" is-link>
+    <group class="market-cells">
+      <cell class="market-cell vux-1px-b" title="基金财富号" value="更多" is-link>
         <span slot="after-title" class="after-title">专业机构，服务直达</span>
         <span slot="after-title" class="left-border"></span>
       </cell>
@@ -224,37 +227,47 @@ export default {
 };
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .jjph
   color #3187FF
   font-size 24px!important
 .zxjj
   color #FE5F3F
-  font-size 16px!important
+  font-size 18px!important
 .ztxj
   color #FEB941
   font-size 24px!important
-.weui-grids
+.market-grids
   background #FFFFFF
-.weui-grids:before
+.market-grids:before
   display none
-.weui-grid:after
+.market-grid:after
   display none
-.weui-grid
-  padding 15px 0!important
-.weui-grid__icon
-  text-align: center
-  line-height: 28px
-.weui-grid__label
-  margin 0!important
-.weui-cells
-  margin-top 10px!important
-.weui-cells:before
-  display none
-.weui-cells:after
-  display none
-.weui-cell
-  padding 12px!important
+.market-grid
+  padding 15px 0
+  text-align center
+  >i
+    display block
+    height: 28px
+    line-height: 28px
+  >p
+    font-size 14px
+    color #2c3e50
+  .weui-cells
+    margin-top 10px
+  .weui-cells:before
+    display none
+  .weui-cells:after
+    display none
+// .weui-cells
+//   >div
+//     margin-top 10px
+//   >div:before
+//     display none
+//   >div:after
+//     display none
+// .market-cell
+//   padding 12px
 .vux-label
   font-size 17px
   font-weight bold
