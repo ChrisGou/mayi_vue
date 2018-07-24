@@ -14,9 +14,12 @@
         <p>主题选基</p>
       </grid-item>
     </grid>
-    <group class="market-cells">
-      <cell class="market-cell vux-1px-b" title="好基工作室" value="更多" is-link>
-        <span slot="after-title" class="left-border"></span>
+    <group>
+      <cell class="market-cell vux-1px-b" is-link>
+        <div slot="title" class="market-cell-title">
+          <span>好基工作室</span>
+        </div>
+        <span class="market-cell-value">更多</span>
       </cell>
       <div class="hjgzs">
         <p>中欧行业成长混合A</p>
@@ -33,12 +36,14 @@
         <x-button class="hjgzs-btn">10元体验好基金</x-button>
       </div>
     </group>
-    <group class="market-cells">
-      <cell class="market-cell vux-1px-b" title="低风险基金">
-        <span slot="after-title" class="after-title">历史从未亏损</span>
-        <span slot="after-title" class="left-border"></span>
+    <group>
+      <cell class="market-cell vux-1px-b">
+        <div slot="title" class="market-cell-title">
+          <span>低风险基金</span>
+        </div>
+        <span slot="after-title" class="market-cell-after-title">历史从未亏损</span>
       </cell>
-      <grid :cols="2">
+      <grid :cols="2" class="market-grids" :show-lr-borders="false">
         <grid-item v-for="item of dfxjj_data" :key="item.name" class="dfxjj_data">
           <p class="name">{{item.name}}</p>
           <p class="rate">{{item.rate}}</p>
@@ -46,10 +51,13 @@
         </grid-item>
       </grid>
     </group>
-    <group class="market-cells">
-      <cell class="market-cell vux-1px-b" title="每天10块钱" value="更多" is-link>
-        <span slot="after-title" class="after-title">提前入市等牛来</span>
-        <span slot="after-title" class="left-border"></span>
+    <group>
+      <cell class="market-cell vux-1px-b" is-link>
+        <div slot="title" class="market-cell-title">
+          <span>每天10块钱</span>
+        </div>
+        <span slot="after-title" class="market-cell-after-title">提前入市等牛来</span>
+        <span class="market-cell-value">更多</span>
       </cell>
       <div class="mtskq">
         <p class="name">银华富裕主题混合</p>
@@ -58,10 +66,12 @@
         <x-button class="mtskq-btn">立即定投</x-button>
       </div>
     </group>
-    <group class="market-cells">
-      <cell class="market-cell vux-1px-b" title="绩优基金">
-        <span slot="after-title" class="after-title">王牌好基，业绩优良</span>
-        <span slot="after-title" class="left-border"></span>
+    <group>
+      <cell class="market-cell vux-1px-b">
+        <div slot="title" class="market-cell-title">
+          <span>绩优基金</span>
+        </div>
+        <span slot="after-title" class="market-cell-after-title">王牌好基，业绩优良</span>
       </cell>
       <div v-for="item of jyjj_data" :key="item.name" class="item_data vux-1px-b">
         <div class="left vux-1px-r">
@@ -74,9 +84,12 @@
         </div>
       </div>
     </group>
-    <group class="market-cells">
-      <cell class="market-cell vux-1px-b" title="投资热点" value="更多" is-link>
-        <span slot="after-title" class="left-border"></span>
+    <group>
+      <cell class="market-cell vux-1px-b" is-link>
+        <div slot="title" class="market-cell-title">
+          <span>投资热点</span>
+        </div>
+        <span class="market-cell-value">更多</span>
       </cell>
       <div v-for="(item,index) of tzrd_data" :key="item.name" class="tzrd_data vux-1px-b">
         <div :class="[left,{ color: index==1 }]">{{item.name}}</div>
@@ -86,10 +99,12 @@
         </div>
       </div>
     </group>
-    <group class="market-cells">
-      <cell class="market-cell vux-1px-b" title="投资海外">
-        <span slot="after-title" class="after-title">一键布局全球</span>
-        <span slot="after-title" class="left-border"></span>
+    <group>
+      <cell class="market-cell vux-1px-b">
+        <div slot="title" class="market-cell-title">
+          <span>投资海外</span>
+        </div>
+        <span slot="after-title" class="market-cell-after-title">一键布局全球</span>
       </cell>
       <div v-for="item of tzhw_data" :key="item.name" class="item_data vux-1px-b">
         <div class="left vux-1px-r">
@@ -102,10 +117,13 @@
         </div>
       </div>
     </group>
-    <group class="market-cells">
-      <cell class="market-cell vux-1px-b" title="基金财富号" value="更多" is-link>
-        <span slot="after-title" class="after-title">专业机构，服务直达</span>
-        <span slot="after-title" class="left-border"></span>
+    <group>
+      <cell class="market-cell vux-1px-b" is-link>
+        <div slot="title" class="market-cell-title">
+          <span>基金财富号</span>
+        </div>
+        <span slot="after-title" class="market-cell-after-title">专业机构，服务直达</span>
+        <span class="market-cell-value">更多</span>
       </cell>
       <div v-for="item of jjcfh_data" :key="item.name" class="jjcfh_data vux-1px-b">
         <div class="left vux-1px-r">
@@ -259,37 +277,30 @@ export default {
     display none
   .weui-cells:after
     display none
-// .weui-cells
-//   >div
-//     margin-top 10px
-//   >div:before
-//     display none
-//   >div:after
-//     display none
-// .market-cell
-//   padding 12px
-.vux-label
-  font-size 17px
-  font-weight bold
-.after-title
-  display block
-  margin-left 8px
-  font-size 13px
-  color #999999
-.weui-cell_access
-  font-size 14px
-.vux-cell-primary
-  p
+
+.market-cell
+  padding 12px
+  .market-cell-title
     display flex
+    padding-left 8px
+    border-left 4px solid #219BF0
     align-items center
-.weui-cell__ft:after
-  margin-top -6px!important
-.left-border
-  width 4px
-  height 14px
-  margin-right 5px
-  background #219BF0
-  order -1
+    >span
+      font-size 17px
+      font-weight bold
+      line-height 1
+      position relative
+      top 1px
+  .market-cell-after-title
+    margin-left 8px
+    font-size 13px
+    color #999999
+  .market-cell-value
+    font-size 14px
+.market-grids:before
+  display none
+.market-grids:after
+  display none
 .hjgzs
   padding 35px 28px 15px 28px
   text-align center
@@ -334,10 +345,10 @@ export default {
     border-radius 2px
     color #FFFFFF
     padding 5px 0
-.weui-btn:after
-  display none
+  .hjgzs-btn:after
+    display none
+
 .dfxjj_data
-  border-bottom 1px solid #F7F7F7
   text-align center
   padding 25px 0 15px 0!important
   .name

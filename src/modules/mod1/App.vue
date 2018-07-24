@@ -56,6 +56,15 @@ body {
   width: 100%;
   overflow-x: hidden;
 }
+
+// reset some vux css
+.weui-cells:before {
+  display: none;
+}
+
+.weui-cells:after {
+  display: none;
+}
 </style>
 <style lang="stylus" scoped>
 #app
