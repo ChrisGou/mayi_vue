@@ -73,14 +73,16 @@
         </div>
         <span slot="after-title" class="market-cell-after-title">王牌好基，业绩优良</span>
       </cell>
-      <div v-for="item of jyjj_data" :key="item.name" class="item_data vux-1px-b">
-        <div class="left vux-1px-r">
-          <p class="rate">+{{item.rate}}</p>
-          <p class="tip">近一年涨跌幅</p>
-        </div>
-        <div class="right">
-          <p class="name">{{item.name}}</p>
-          <p class="info">{{item.info}}</p>
+      <div class="jyjj_data">
+        <div v-for="item of jyjj_data" :key="item.name" class="item_data vux-1px-b">
+          <div class="left vux-1px-r">
+            <p class="rate">+{{item.rate}}</p>
+            <p class="tip">近一年涨跌幅</p>
+          </div>
+          <div class="right">
+            <p class="name">{{item.name}}</p>
+            <p class="info">{{item.info}}</p>
+          </div>
         </div>
       </div>
     </group>
@@ -91,11 +93,13 @@
         </div>
         <span class="market-cell-value">更多</span>
       </cell>
-      <div v-for="(item,index) of tzrd_data" :key="item.name" class="tzrd_data vux-1px-b">
-        <div :class="[left,{ color: index==1 }]">{{item.name}}</div>
-        <div class="right">
-          <p class="info">{{item.info}}</p>
-          <p class="tip">{{item.tip}}</p>
+      <div class="tzrd_data">
+        <div v-for="(item,index) of tzrd_data" :key="item.name" class="tzrd_item_data vux-1px-b">
+          <div :class="[left,{ color: index==1 }]">{{item.name}}</div>
+          <div class="right">
+            <p class="info">{{item.info}}</p>
+            <p class="tip">{{item.tip}}</p>
+          </div>
         </div>
       </div>
     </group>
@@ -106,14 +110,16 @@
         </div>
         <span slot="after-title" class="market-cell-after-title">一键布局全球</span>
       </cell>
-      <div v-for="item of tzhw_data" :key="item.name" class="item_data vux-1px-b">
-        <div class="left vux-1px-r">
-          <p class="rate">+{{item.rate}}</p>
-          <p class="tip">近一年涨跌幅</p>
-        </div>
-        <div class="right">
-          <p class="name">{{item.name}}</p>
-          <p class="info">{{item.info}}</p>
+      <div class="tzhw_data">
+        <div v-for="item of tzhw_data" :key="item.name" class="item_data vux-1px-b">
+          <div class="left vux-1px-r">
+            <p class="rate">+{{item.rate}}</p>
+            <p class="tip">近一年涨跌幅</p>
+          </div>
+          <div class="right">
+            <p class="name">{{item.name}}</p>
+            <p class="info">{{item.info}}</p>
+          </div>
         </div>
       </div>
     </group>
@@ -125,14 +131,16 @@
         <span slot="after-title" class="market-cell-after-title">专业机构，服务直达</span>
         <span class="market-cell-value">更多</span>
       </cell>
-      <div v-for="item of jjcfh_data" :key="item.name" class="jjcfh_data vux-1px-b">
-        <div class="left vux-1px-r">
-          <img :src="item.img" alt="">
-        </div>
-        <div class="right">
-          <p class="name">{{item.name}}</p>
-          <p class="info">{{item.info}}</p>
-          <p class="tip">{{item.tip}}</p>
+      <div class="jjcfh_data">
+        <div v-for="item of jjcfh_data" :key="item.name" class="jjcfh_item_data vux-1px-b">
+          <div class="left vux-1px-r">
+            <img :src="item.img" alt="">
+          </div>
+          <div class="right">
+            <p class="name">{{item.name}}</p>
+            <p class="info">{{item.info}}</p>
+            <p class="tip">{{item.tip}}</p>
+          </div>
         </div>
       </div>
     </group>
@@ -279,6 +287,8 @@ export default {
     display none
 
 .market-cell
+  margin-top 1.17647059em!important
+  background-color #FFFFFF
   padding 12px
   .market-cell-title
     display flex
@@ -302,6 +312,7 @@ export default {
 .market-grids:after
   display none
 .hjgzs
+  background #FFFFFF
   padding 35px 28px 15px 28px
   text-align center
   >p
@@ -349,6 +360,7 @@ export default {
     display none
 
 .dfxjj_data
+  background #FFFFFF
   text-align center
   padding 25px 0 15px 0!important
   .name
@@ -362,6 +374,7 @@ export default {
     font-size 12px
     color #999999
 .mtskq
+  background #FFFFFF
   text-align center
   padding 20px 30px
   .name
@@ -381,9 +394,11 @@ export default {
     border-radius 2px
     color #FFFFFF
     padding 5px 0
+.jyjj_data,.tzhw_data,.jjcfh_data,.tzrd_data
+  padding-left 15px
+  background #FFFFFF
 .item_data
   padding 25px 0
-  margin-left 15px
   display flex
   .left
     flex 1
@@ -409,9 +424,8 @@ export default {
       font-size 12px
       color #999999
       margin-top 5px
-.tzrd_data
+.tzrd_item_data
   display flex
-  margin-left 15px
   padding 20px 0
   .left
     width 60px
@@ -439,8 +453,7 @@ export default {
       font-size 14px
       color #999999
       margin-top 5px
-.jjcfh_data
-  margin-left 15px
+.jjcfh_item_data
   display flex
   .left
     width 80px

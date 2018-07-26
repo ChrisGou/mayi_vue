@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="height:100%;">
+  <div id="app" style="height:100%">
     <!-- main content -->
     <view-box ref="viewBox" :body-padding-top="isShowNav ? '46px' : '0'" body-padding-bottom="55px">
       <router-view/>
@@ -58,6 +58,10 @@ body {
 }
 
 // reset some vux css
+.weui-cells{
+  margin-top: 0!important;
+  background-color: #f5f5f5!important;
+}
 .weui-cells:before {
   display: none;
 }
@@ -70,7 +74,6 @@ body {
 #app
   font-family 'Avenir', Helvetica, Arial, sans-serif
   color #2c3e50
-  padding-bottom 70px
 i
   font-size 20px!important
 .app-tabbar
