@@ -12,16 +12,19 @@ export default new Router({
       path: "/",
       name: "market",
       component: Market
+      // component: resolve => require(['./views/Market.vue'], resolve)
     },
     {
       path: "/select",
       name: "select",
       component: Select
+      // component: resolve => require(['./views/Select.vue'], resolve)
     },
     {
       path: "/my",
       name: "my",
       component: My
+      // component: resolve => require(['./views/My.vue'], resolve)
     }
   ]
 });

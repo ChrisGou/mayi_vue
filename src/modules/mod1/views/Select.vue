@@ -33,9 +33,11 @@
               <div class="item_name">{{item.name}}</div>
               <div class="item_id">{{item.id}}</div>
             </flexbox-item>
-            <flexbox-item :span="1/4" style="text-align:right">
-              <div class="item_guzhi" style="margin-right:25%">{{item.guzhi}}</div>
-              <div class="item_guzhi_rate" style="margin-right:25%">{{item.guzhi_rate}}</div>
+            <flexbox-item :span="1/4" style="text-align:right;display:flex;justify-content:center">
+              <div>
+                <div class="item_guzhi">{{item.guzhi}}</div>
+                <div class="item_guzhi_rate">{{item.guzhi_rate}}</div>
+              </div>
             </flexbox-item>
             <flexbox-item :span="1/4" style="text-align:right">
               <div class="item_jingzhi">{{item.jingzhi}}</div>
