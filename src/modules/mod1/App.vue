@@ -1,9 +1,9 @@
 <template>
   <div id="app" style="height:100%">
     <!-- main content -->
-    <view-box ref="viewBox" :body-padding-top="isShowNav ? '46px' : '0'" body-padding-bottom="55px">
+    <view-box ref="viewBox" :body-padding-top="isShowNav ? '46px' : '0'" body-padding-bottom="50px">
       <router-view/>
-      <tabbar slot="bottom" class="app-tabbar">
+      <tabbar slot="bottom" class="app-tabbar" @on-index-change="_tabBarChange">
         <tabbar-item :selected="market" link="/">
           <i slot="icon" class='iconfont icon-supermarket'></i>
           <i slot="icon-active" class='iconfont icon-market'></i>
@@ -39,6 +39,11 @@ export default {
       select: this.$router.match(location).hash == "#/select",
       my: this.$router.match(location).hash == "#/my"
     };
+  },
+  methods: {
+    _tabBarChange() {
+      this.$refs.viewBox.scrollTo(0,0);//tabbar切换时页面滚动到顶部
+    }
   }
 };
 </script>

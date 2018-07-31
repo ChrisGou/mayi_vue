@@ -6,3 +6,6 @@
 
 ##遇见的问题
 - vux组件的样式 如果是组件自动添加的Dom层，则无法在业务使用中通过scoped样式进行覆盖修改，只能通过插槽修改样式
+- 在写移动端页面的时候,弹出遮罩层后，我们仍然可以滚动页面。 vue中提供 @touchmove.prevent 方法可以完美解决这个问题
+
+`<div class="dialog" @touchmove.prevent ></div>`
