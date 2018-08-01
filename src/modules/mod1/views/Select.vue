@@ -32,7 +32,11 @@
             <flexbox :gutter="0" class="select-flexbox">
               <flexbox-item :span="1/2">
                 <div class="item_name">{{item.name}}</div>
-                <div class="item_id">{{item.id}}</div>
+                <div class="item_id">
+                  <span>{{item.id}}</span>
+                  <span class="item_status" v-show="item.status&&item.status=='has'">持有</span>
+                  <span class="item_tag" v-show="item.tag">{{item.tag}}</span>
+                </div>
               </flexbox-item>
               <flexbox-item :span="1/4" style="text-align:right;display:flex;justify-content:center">
                 <div>
@@ -44,7 +48,7 @@
                 <div class="item_jingzhi">{{item.jingzhi}}</div>
                 <div class="item_jingzhi_bottom">
                   <span class="item_date">{{item.date}}</span>
-                  <span class="item_jingzhi_rate" :style="{color: colors[item.jingzhi_rate.indexOf('+')>-1?'up':'down']}">{{item.jingzhi_rate}}</span>
+                  <span class="item_jingzhi_rate" :style="{color: _getColor(item.jingzhi_rate)}">{{item.jingzhi_rate}}</span>
                 </div>
               </flexbox-item>
             </flexbox>
@@ -56,13 +60,37 @@
     </div>
     <div class="hq-modal" @touchmove="_canScroll" :style="{background: isMask? 'rgba(0,0,0,0.3)': ''}">
       <div class="hq" @click="isMask=!isMask">
-        <span class="hq-name">{{hq_data[0].name}}</span>
-        <span class="hq-value" :style="{color: colors[hq_data[0].rate.indexOf('+')>-1?'up':'down']}">{{hq_data[0].value}}</span>
-        <span class="hq-rate" :style="{color: colors[hq_data[0].rate.indexOf('+')>-1?'up':'down']}">{{hq_data[0].rate}}</span>
-        <span class="hq-name">{{hq_data[1].name}}</span>
-        <span class="hq-value" :style="{color: colors[hq_data[1].rate.indexOf('+')>-1?'up':'down'],borderColor: colors[hq_data[1].rate.indexOf('+')>-1?'up':'down']}">{{hq_data[1].value}}</span>
-        <span class="hq-rate" :style="{color: colors[hq_data[1].rate.indexOf('+')>-1?'up':'down'],borderColor: colors[hq_data[1].rate.indexOf('+')>-1?'up':'down']}">{{hq_data[1].rate}}</span>
+        <div class="hq-info" v-if="!isMask">
+          <span class="hq-name">{{hq_data[0].name}}</span>
+          <span class="hq-value" :style="{color: _getColor(hq_data[0].rate)}">{{hq_data[0].value}}</span>
+          <span class="hq-rate" :style="{color: _getColor(hq_data[0].rate)}">{{hq_data[0].rate}}</span>
+          <span class="hq-name">{{hq_data[1].name}}</span>
+          <span class="hq-value" :style="{color: _getColor(hq_data[1].rate),borderColor: _getColor(hq_data[1].rate)}">{{hq_data[1].value}}</span>
+          <span class="hq-rate" :style="{color: _getColor(hq_data[1].rate),borderColor: _getColor(hq_data[1].rate)}">{{hq_data[1].rate}}</span>
+        </div>
+        <div class="hq-info" v-else>
+          <span class="hq-tip">行情信息</span>
+          <span class="hq-time">更新于10:58:47</span>
+        </div>
         <span class="arrow" :class="{'arrow-up':!isMask,'down2up':!isMask,'arrow-down':isMask,'up2down':isMask}"></span>
+      </div>
+      <div class="hq-detail" v-show="isMask">
+        <flexbox :gutter="0" wrap="wrap">
+          <flexbox-item :span="1/3" v-for="item of hq_data" :key="item.name">
+            <div class="hq-detail-item vux-1px-r">
+              <div class="item-name">{{item.name}}</div>
+              <div class="item-value" :style="{color: _getColor(item.changeValue)}">
+                <span>{{item.value}}</span>
+                <i class='iconfont icon-arrowsup' v-if="item.changeValue.indexOf('+') > -1"></i>
+                <i class='iconfont icon-arrowsdown' v-else></i>
+              </div>
+              <div class="item-bottom" :style="{color: _getColor(item.changeValue)}">
+                <span class="item-changeValue">{{item.changeValue}}</span>
+                <span class="item-rate">{{item.rate}}</span>
+              </div>
+            </div>
+          </flexbox-item>
+        </flexbox>
       </div>
     </div>
   </div>
@@ -95,7 +123,8 @@ export default {
           guzhi_rate: "-1.17%",
           jingzhi: "2.4530",
           data: "07-20",
-          jingzhi_rate: "+1.24%"
+          jingzhi_rate: "+1.24%",
+          status: 'has'
         },
         {
           name: "华安策略优选混合",
@@ -104,7 +133,8 @@ export default {
           guzhi_rate: "-0.24%",
           jingzhi: "1.5393",
           data: "07-20",
-          jingzhi_rate: "+1.33%"
+          jingzhi_rate: "+1.33%",
+          tag: '市场解读'
         },
         {
           name: "交银优势行业混合",
@@ -140,7 +170,9 @@ export default {
           guzhi_rate: "+0.17%",
           jingzhi: "1.2262",
           data: "07-20",
-          jingzhi_rate: "-1.68%"
+          jingzhi_rate: "-1.68%",
+          status: 'has',
+          tag: '市场解读'
         },
         {
           name: "大成策略回报混合",
@@ -220,37 +252,37 @@ export default {
           name: "上证指数",
           value: 2839.83,
           changeValue: "+10.55",
-          rate: "+0.37"
+          rate: "+0.37%"
         },
         {
           name: "深证成指",
           value: 9237.05,
           changeValue: "-14.43",
-          rate: "-0.16"
+          rate: "-0.16%"
         },
         {
           name: "创业板指",
           value: 1606.31,
           changeValue: "-3.24",
-          rate: "-0.20"
+          rate: "-0.20%"
         },
         {
           name: "沪深300",
           value: 3498.73,
           changeValue: "+5.83",
-          rate: "+0.17"
+          rate: "+0.17%"
         },
         {
           name: "上证50",
           value: 2509.29,
           changeValue: "+15.53",
-          rate: "+0.62"
+          rate: "+0.62%"
         },
         {
           name: "中证500",
           value: 5174.84,
           changeValue: "-0.41",
-          rate: "-0.01"
+          rate: "-0.01%"
         }
       ]
     };
@@ -261,6 +293,9 @@ export default {
         e.preventDefault()
       }
     },
+    _getColor(item) {
+      return this.colors[item.indexOf('+') > -1 ? 'up' : 'down']
+    }
   },
   mounted() {
     this.selectListHeight = document.body.offsetHeight - 90 + 'px'
@@ -322,6 +357,26 @@ export default {
 .item_id
   color #999999
   font-size 15px
+  display flex
+  align-items center
+  span
+    display block
+  .item_status
+    color #ffffff
+    line-height 1.4
+    font-size 8px
+    background #219BF0
+    padding 0 3px
+    margin-left 5px
+    border-radius 2px
+  .item_tag
+    color #fe5f3f
+    border 1px solid #fe5f3f
+    line-height 1.2
+    font-size 8px
+    padding 0 3px
+    margin-left 5px
+    border-radius 2px
 .item_guzhi,.item_jingzhi,.item_guzhi_rate
   color #2E2E2E
 .item_guzhi_rate,.item_jingzhi_rate
@@ -344,12 +399,12 @@ export default {
   padding 15px 0
 .gz-tips
   text-align center
-  padding 15px 30px 100px 30px
+  padding 15px 30px 80px 30px
   font-size 13px
   color #999999
 .hq-modal
   display flex
-  align-items flex-end
+  flex-direction column-reverse
   position absolute
   top 0
   left 0
@@ -357,17 +412,22 @@ export default {
   bottom 50px
   .hq
     width 100%
-    padding-left 15px
-    height 40px
+    height 45px
     display flex
     align-items center
     box-shadow 0 -4px 5px -3px #EEEEEE
     background #ffffff
+    z-index 1
+    .hq-info
+      flex 1
+      display flex
+      align-items center
     span
       display block
       line-height 0
     .hq-name
       font-size 12px
+      margin-left 15px
     .hq-value
       font-size 11px
       font-weight bold
@@ -378,12 +438,36 @@ export default {
       line-height 1!important
       position relative
       bottom 1px
-      margin-right 20px
       border 1px solid #fe5f3f
       border-radius 2px
+    .hq-tip
+      font-size 12px
+      margin-left 15px
+    .hq-time
+      font-size 10px
+      color #999999
+      margin-left 10px
+  .hq-detail
+    background #ffffff
+    .hq-detail-item
+      margin 15px 0
+      text-align center
+      font-size 14px
+      line-height 1.4
+      .item-value
+        font-weight bold
+        i 
+         font-size 10px
+         position absolute
+         top 21px
+      .item-bottom
+        font-size 11px
+        .item-rate
+          margin-left 5px
 .arrow 
   width 8px
   height 8px
+  margin-right 15px
   border 0 solid #999999
   border-width 0 1px 1px 0
 .arrow-up
