@@ -144,6 +144,11 @@
         </div>
       </div>
     </group>
+    <div class="bottom-tip">
+      <p class="company">基金销售服务由蚂蚁（杭州）基金销售有限公司提供</p>
+      <p class="tips">本页面非任何法律文件，投资前请阅读基金合同、招募说明书。过往业绩不预示未来表现，市场有风险，投资需谨慎。</p>
+      <divider style="color:#b9b7b7">该页面由蚂蚁财富平台设计并提供</divider>
+    </div>
   </div>
 </template>
 
@@ -156,7 +161,8 @@ import {
   Cell,
   XButton,
   Flexbox,
-  FlexboxItem
+  FlexboxItem,
+  Divider
 } from "vux";
 
 export default {
@@ -168,7 +174,8 @@ export default {
     Cell,
     XButton,
     Flexbox,
-    FlexboxItem
+    FlexboxItem,
+    Divider
   },
   data() {
     return {
@@ -287,7 +294,7 @@ export default {
     display none
 
 .market-cell
-  margin-top 1.17647059em!important
+  margin-top 10px
   background-color #FFFFFF
   padding 12px
   .market-cell-title
@@ -479,5 +486,13 @@ export default {
       font-size 13px
       color #fe5f3f
       margin-top 2px
-      
+.bottom-tip
+  padding 0 15px 30px 15px
+  font-size 13px
+  text-align center
+  .company
+    color #999999
+    margin 30px 0 10px 0
+  .tips
+    color #b9b7b7
 </style>

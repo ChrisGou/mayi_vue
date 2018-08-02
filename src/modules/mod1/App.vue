@@ -77,7 +77,7 @@ body {
 </style>
 <style lang="stylus" scoped>
 #app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
+  font-family PingFangSC-Regular
   color #2c3e50
 i
   font-size 20px!important
