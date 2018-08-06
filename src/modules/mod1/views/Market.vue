@@ -44,7 +44,7 @@
         <span slot="after-title" class="market-cell-after-title">历史从未亏损</span>
       </cell>
       <grid :cols="2" class="market-grids" :show-lr-borders="false">
-        <grid-item v-for="item of dfxjj_data" :key="item.name" class="dfxjj_data">
+        <grid-item v-for="item of marketData.dfxjj_data" :key="item.name" class="dfxjj_data">
           <p class="name">{{item.name}}</p>
           <p class="rate">{{item.rate}}</p>
           <p class="tip">七日年化</p>
@@ -74,7 +74,7 @@
         <span slot="after-title" class="market-cell-after-title">王牌好基，业绩优良</span>
       </cell>
       <div class="jyjj_data">
-        <div v-for="item of jyjj_data" :key="item.name" class="item_data vux-1px-b">
+        <div v-for="item of marketData.jyjj_data" :key="item.name" class="item_data vux-1px-b">
           <div class="left vux-1px-r">
             <p class="rate">+{{item.rate}}</p>
             <p class="tip">近一年涨跌幅</p>
@@ -94,7 +94,7 @@
         <span class="market-cell-value">更多</span>
       </cell>
       <div class="tzrd_data">
-        <div v-for="(item,index) of tzrd_data" :key="item.name" class="tzrd_item_data vux-1px-b">
+        <div v-for="(item,index) of marketData.tzrd_data" :key="item.name" class="tzrd_item_data vux-1px-b">
           <div :class="[left,{ color: index==1 }]">{{item.name}}</div>
           <div class="right">
             <p class="info">{{item.info}}</p>
@@ -111,7 +111,7 @@
         <span slot="after-title" class="market-cell-after-title">一键布局全球</span>
       </cell>
       <div class="tzhw_data">
-        <div v-for="item of tzhw_data" :key="item.name" class="item_data vux-1px-b">
+        <div v-for="item of marketData.tzhw_data" :key="item.name" class="item_data vux-1px-b">
           <div class="left vux-1px-r">
             <p class="rate">+{{item.rate}}</p>
             <p class="tip">近一年涨跌幅</p>
@@ -132,7 +132,7 @@
         <span class="market-cell-value">更多</span>
       </cell>
       <div class="jjcfh_data">
-        <div v-for="item of jjcfh_data" :key="item.name" class="jjcfh_item_data vux-1px-b">
+        <div v-for="item of marketData.jjcfh_data" :key="item.name" class="jjcfh_item_data vux-1px-b">
           <div class="left vux-1px-r">
             <img :src="item.img" alt="">
           </div>
@@ -164,6 +164,8 @@ import {
   FlexboxItem,
   Divider
 } from "vux";
+// import {GET} from '../../../../public/utils/fetch'
+import request from 'superagent';
 
 export default {
   name: "home",
@@ -181,82 +183,20 @@ export default {
     return {
       left: "left",
       color: "color",
-      dfxjj_data: [
-        {
-          name: "工银瑞信如意货币A",
-          rate: "4.0670%"
-        },
-        {
-          name: "建信现金增利货币",
-          rate: "4.1520%"
-        },
-        {
-          name: "华夏理财30天债券A",
-          rate: "4.1830%"
-        },
-        {
-          name: "广发理财30天债券A",
-          rate: "4.0880%"
-        }
-      ],
-      jyjj_data: [
-        {
-          name: "嘉实全球互联网股票(QDII)",
-          rate: "16.92%",
-          info: "10元海淘全球科技巨头"
-        },
-        {
-          name: "易方达消费行业股票",
-          rate: "22.71%",
-          info: "喜欢你花钱的样子"
-        }
-      ],
-      tzhw_data: [
-        {
-          name: "嘉实美国成长股票(QDII)",
-          rate: "21.55%",
-          info: "10元让美国巨头为你赚钱"
-        },
-        {
-          name: "上投摩根中国世纪灵活配置混合(QDII)",
-          rate: "21.19%",
-          info: "Top中企一键淘"
-        }
-      ],
-      tzrd_data: [
-        {
-          name: "银行",
-          info: "抓住MSCI机会",
-          tip: "A股入摩，银行受益"
-        },
-        {
-          name: "创业板",
-          info: '抢占"中国未来"风口',
-          tip: "业绩支撑，行情向好"
-        }
-      ],
-      jjcfh_data: [
-        {
-          img: require("../assets/yfd.png"),
-          name: "易方达基金财富号",
-          info: "五千万客户选了，来吧",
-          tip: "买入费率1折起"
-        },
-        {
-          img: require("../assets/gyrx.png"),
-          name: "工银瑞信基金财富号",
-          info: "聪明理财，工银一路陪伴",
-          tip: "买入费率1折起"
-        },
-        {
-          img: require("../assets/gt.png"),
-          name: "国泰基金财富号",
-          info: "股基投资NO.1，快跟上",
-          tip: "买入费率1折起"
-        }
-      ]
+      marketData: {}
     };
-  }
+  },
+  created() {
+    request
+      .get(this.API['getMarketData'])
+      .end((err, res) => {//此处使用箭头函数，否则找不到this
+        if (err) {
+          alert(JSON.parse(res.text).msg)
+          return;
+        }
+        this.marketData = JSON.parse(res.text);
+      });
+  },
 };
 </script>
 

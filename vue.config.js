@@ -1,4 +1,5 @@
 module.exports = {
+  lintOnSave: false,//禁用eslint
   baseUrl: process.env.NODE_ENV === 'production' ? '/mayi_vue/' : '/',
   pages: require('./multiPage.js'),
   productionSourceMap: false,//生产环境禁用map
