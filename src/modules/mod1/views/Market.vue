@@ -33,7 +33,7 @@
           <div class="right">连连抓住行业涨幅冠亚军</div>
           <div class="arrowDown"></div>
         </div>
-        <x-button class="hjgzs-btn">10元体验好基金</x-button>
+        <x-button class="hjgzs-btn" @click.native="setData">10元体验好基金</x-button>
       </div>
     </group>
     <group>
@@ -149,6 +149,7 @@
       <p class="tips">本页面非任何法律文件，投资前请阅读基金合同、招募说明书。过往业绩不预示未来表现，市场有风险，投资需谨慎。</p>
       <divider style="color:#b9b7b7">该页面由蚂蚁财富平台设计并提供</divider>
     </div>
+    <toast v-model="showToast" type="text">{{toastMsg}}</toast>
   </div>
 </template>
 
@@ -162,7 +163,8 @@ import {
   XButton,
   Flexbox,
   FlexboxItem,
-  Divider
+  Divider,
+  Toast
 } from "vux";
 // import {GET} from '../../../../public/utils/fetch'
 import request from 'superagent';
@@ -177,26 +179,45 @@ export default {
     XButton,
     Flexbox,
     FlexboxItem,
-    Divider
+    Divider,
+    Toast
   },
   data() {
     return {
       left: "left",
       color: "color",
-      marketData: {}
+      marketData: {},
+      toastMsg: '',
+      showToast: false
     };
   },
   created() {
     request
-      .get(this.API['getMarketData'])
+      .post(this.API['getMarketData'])
       .end((err, res) => {//此处使用箭头函数，否则找不到this
         if (err) {
           alert(JSON.parse(res.text).msg)
           return;
         }
-        this.marketData = JSON.parse(res.text);
+        
+        this.marketData = JSON.parse(res.text).data[0];
+        this.toastMsg = JSON.parse(res.text).msg
+        this.showToast = true
       });
   },
+  methods: {
+    setData() {
+      console.log('setData')
+      request
+        .post(this.API['setMarketData'])
+        .end((err, res) => {//此处使用箭头函数，否则找不到this
+          if (err) {
+            alert(JSON.parse(res.text).msg)
+            return;
+          }
+        });
+    }
+  }
 };
 </script>
 

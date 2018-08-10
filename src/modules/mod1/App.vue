@@ -4,10 +4,10 @@
     <view-box ref="viewBox" :body-padding-top="isShowNav ? '46px' : '0'" body-padding-bottom="50px">
       <router-view/>
       <tabbar slot="bottom" class="app-tabbar" @on-index-change="_tabBarChange">
-        <tabbar-item :selected="market" link="/">
+        <tabbar-item :selected="market" link="/market">
           <i slot="icon" class='iconfont icon-supermarket'></i>
           <i slot="icon-active" class='iconfont icon-market'></i>
-          <span slot="label">市场</span>
+          <span slot="label">市场2</span>
         </tabbar-item>
         <tabbar-item :selected="select" link="/select">
           <i slot="icon" class='iconfont icon-tag-add-l'></i>
@@ -35,9 +35,9 @@ export default {
   data() {
     return {
       isShowNav: false,
-      market: this.$router.match(location).hash == "#/",
-      select: this.$router.match(location).hash == "#/select",
-      my: this.$router.match(location).hash == "#/my"
+      market: location.pathname == "/market",
+      select: location.pathname == "/select",
+      my: location.pathname == "/my"
     };
   },
   methods: {

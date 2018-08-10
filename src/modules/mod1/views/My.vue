@@ -3,7 +3,7 @@
     <div class="pannel">
       <div class="pannel-top">
         <div class="pannel-text">总金额(元)</div>
-        <div class="amount">51,948.81</div>
+        <div class="amount" @click="showMask = true">51,948.81</div>
         <div>
           <span class="pannel-text">买入待确认</span>
           <span class="buy-amount">50.00</span>
@@ -91,11 +91,13 @@
       <p class="tips">本页面非任何法律文件，收益数据仅供参考。过往业绩不预示未来表现，市场有风险，投资需谨慎。</p>
       <divider style="color:#b9b7b7">该页面由蚂蚁财富平台设计并提供</divider>
     </div>
+    <mayi-mask v-model="showMask">asdasdasdasdasd</mayi-mask>
   </div>
 </template>
 
 <script>
 import { Group, Cell, Flexbox, FlexboxItem, Divider } from "vux";
+import MayiMask from "../components/MayiMask";
 
 export default {
   components: {
@@ -103,10 +105,12 @@ export default {
     Cell,
     Flexbox,
     FlexboxItem,
-    Divider
+    Divider,
+    MayiMask
   },
   data() {
     return {
+      showMask: false,
       colors: {
         "up": "#fe5f3f",
         "down": "#0BA194"
@@ -281,7 +285,7 @@ export default {
   methods: {
     _getColor(item) {
       return this.colors[item.indexOf('+') > -1 ? 'up' : 'down']
-    }
+    },
   },
 };
 </script>
